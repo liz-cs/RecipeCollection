@@ -1,0 +1,55 @@
+generator client {
+ provider = "prisma-client-js"
+ previewFeatures = ["referentialIntegrity"]
+}
+datasource db {
+ provider = "mysql"
+ url = env("DATABASE_URL")
+ referentialIntegrity = "prisma"
+}
+
+
+model product {
+  externalId  Int        @id @unique(map: "Product_externalId_key")
+  productName String     @db.VarChar(255) @default("")
+  imageURL    String     @db.VarChar(255) @default("")
+  review      review[]
+  wishlist    wishlist[] @relation("producttowishlist")
+}
+
+model review {
+  id            Int       @id @default(autoincrement())
+  productId     Int
+  userId        Int
+  content       String    @default("") @db.VarChar(10000)
+  rating        Int
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  product       product   @relation(fields: [productId], references: [externalId], onDelete: Cascade, onUpdate: Cascade, map: "Review_productId_fkey")
+  user          user      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "Review_userId_fkey")
+
+  @@index([productId], map: "Review_productId_fkey")
+  @@index([userId], map: "Review_userId_fkey")
+  @@unique([productId, userId], name: "productId_userId_unique_constraint")
+}
+
+model user {
+  id       Int        @id @default(autoincrement())
+  email    String     @unique(map: "User_email_key")
+  auth0Id  String     @unique(map: "User_auth0Id_key") @default("")
+  name     String?
+  review   review[]
+  wishlist wishlist[]
+}
+
+model wishlist {
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(255)
+  userId    Int
+  user      user      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "wishlist_ibfk_1")
+  imageURL  String    @db.VarChar(255) @default("/empty-basket.png")
+  product   product[] @relation("producttowishlist")
+
+  @@index([userId], map: "userId")
+  @@unique([title, userId], name: "title_userId_unique_constraint")
+}

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "materialize-css": "^1.0.0-rc.2",
+    "prop-types": "^15.8.1",
+    "react-materialize": "^3.10.0"
+  },
+  "devDependencies": {
+    "msw": "^0.39.2"
+  }
+}

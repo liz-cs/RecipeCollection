@@ -1,0 +1,79 @@
+.card {
+    background-color: #fff;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1rem !important;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.top-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    border-radius: 10px;
+    border: 2px solid #5957f9;
+}
+
+.name {
+    font-size: 25px;
+    font-weight: bold;
+    position: relative;
+    top: 15px;
+    border-left-width: 10px;
+}
+
+.mail {
+    position: relative;
+    top: 10px;
+}
+
+.middle-container {
+    background-color: #eee;
+    border-radius: 12px;
+}
+
+.middle-container:hover {
+    border: 1px solid #5957f9;
+}
+
+.round-div {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.recipe {
+    font-size: 16px;
+    font-weight: 700;
+    color: #272727;
+    text-decoration: none;
+}
+
+.recipe-border:hover {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+.recipe:link,
+.recipe:hover,
+.recipe:visited,
+.recipe:visited {
+    text-decoration: none;
+}
+
+@media screen and (max-width: 990px) {
+    .special {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
